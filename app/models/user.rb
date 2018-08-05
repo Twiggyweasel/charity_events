@@ -9,6 +9,7 @@ class User < ApplicationRecord
   has_many :organization_members
   has_many :organizations, through: :organization_members
   has_one :organization
+  has_many :donations
   # Validations
   # validates_presence_of :first_name, :last_name, :email
 

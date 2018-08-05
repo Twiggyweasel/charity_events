@@ -8,6 +8,8 @@ RSpec.describe User, type: :model do
   describe "Associations" do
     it { should have_many(:organization_members) }
     it { should have_many(:organizations) }
+    it { should have_many(:donations) }
+
   end
 
   describe "Validations" do

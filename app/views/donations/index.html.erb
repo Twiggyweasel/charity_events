@@ -1,3 +1,5 @@
 <% @donations.each do |d| %>
   <p><%= number_to_currency(d.amount) %></p>
 <% end %>
+
+<%= link_to 'New Donation', new_donation_path %>

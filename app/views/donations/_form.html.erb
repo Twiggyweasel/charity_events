@@ -1,0 +1,6 @@
+<%= simple_form_for @donation do |f| %>
+  <%= f.input :method %>
+  <%= f.input :amount %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.button :submit %>
+<% end %>

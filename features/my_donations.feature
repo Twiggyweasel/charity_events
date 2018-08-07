@@ -12,3 +12,7 @@ Feature: My Donations
     Given I have made donations
     When I visit the homepage
     Then I should see a list of my donations
+
+  Scenario:
+    When I create a new donations
+    Then I should see my new donation in my donations

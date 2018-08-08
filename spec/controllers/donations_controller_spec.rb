@@ -64,4 +64,67 @@ RSpec.describe DonationsController, type: :controller do
       end
     end
   end
+
+  describe "Patch #update" do
+    let(:donation) { FactoryBot.build_stubbed(:donation) }
+
+    before do
+      allow(Donation).to receive(:find).and_return(donation)
+      allow(donation).to receive(:update).and_return(true)
+    end
+
+    it "updates the donation" do
+      patch :update, :params => {
+        :id => donation.id,
+        :donation => { :amount => 5 }
+      }
+
+      expect(donation).to have_received(:update)
+    end
+
+    context "when the update succeeds" do
+      it "redirects to the donation page" do
+        patch :update, :params => {
+          :id => donation.id,
+          :donation => { :amount => 5 }
+        }
+
+        expect(response).to redirect_to(donation_path(donation))
+      end
+    end
+
+    context "when the update fails" do
+      before do
+        allow(donation).to receive(:update).and_return(false)
+      end
+
+      it "renders the update page again" do
+        patch :update, :params => {
+          :id => donation.id,
+          :donation => { :amount => 5 }
+        }
+
+        expect(response).to render_template(:edit)
+      end
+    end
+  end
+
+  describe "DELETE #destroy" do
+    let(:donation) { FactoryBot.build_stubbed(:donation) }
+
+    before do
+      allow(Donation).to  receive(:find).and_return(donation)
+      allow(donation).to  receive(:destroy)
+
+      delete :destroy, :params => { :id => donation.id }
+    end
+
+    it "deletes the donation" do
+      expect(donation).to have_received(:destroy)
+    end
+
+    it "redirects to the index page" do
+      expect(response).to redirect_to(donations_path)
+    end
+  end
 end

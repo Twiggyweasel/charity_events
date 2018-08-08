@@ -1,5 +1,6 @@
+<ul>
 <% @donations.each do |d| %>
-  <p><%= number_to_currency(d.amount) %></p>
+  <li>Method: <%= d.method %> -- Amount: <%= number_to_currency(d.amount) %> -- <%= link_to("Show", d) %> <%= link_to("Edit", edit_donation_path(d)) %> <%= link_to("Delete", donation_path(d), method: :delete) %></li>
 <% end %>
-
+</ul>
 <%= link_to 'New Donation', new_donation_path %>

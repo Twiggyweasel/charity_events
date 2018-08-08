@@ -37,23 +37,23 @@ class DonationsController < ApplicationController
     @donation = Donation.find(params[:id])
 
     respond_to do |wants|
-      if @donation.update_attributes(donation_params)
+      if @donation.update(donation_params)
         flash[:notice] = 'Donation was successfully updated.'
-        wants.html { redirect_to(:donations) }
+        wants.html { redirect_to(@donation) }
         wants.xml  { head :ok }
       else
-        wants.html { render :action => "edit" }
+        wants.html { render :edit }
         wants.xml  { render :xml => @donation.errors, :status => :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @dontion = Donation.find(params[:id])
-    @dontion.destroy
+    @donation = Donation.find(params[:id])
+    @donation.destroy
 
     respond_to do |wants|
-      wants.html { redirect_to(dontions_url) }
+      wants.html { redirect_to(:donations) }
       wants.xml  { head :ok }
     end
   end
